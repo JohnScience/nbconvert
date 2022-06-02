@@ -177,8 +177,7 @@ class PDFExporter(LatexExporter):
 
         return self.run_command(self.bib_command, filename, 1, log_error, raise_on_failure)
 
-    def from_notebook_node(self, nb, resources=None, **kw):
-        latex, resources = super().from_notebook_node(nb, resources=resources, **kw)
+    def from_latex(self, latex, resources=None, **kw):
         # set texinputs directory, so that local files will be found
         if resources and resources.get("metadata", {}).get("path"):
             self.texinputs = resources["metadata"]["path"]
@@ -210,3 +209,9 @@ class PDFExporter(LatexExporter):
         resources.pop("outputs", None)
 
         return pdf_data, resources
+
+    def from_notebook_node(self, nb, resources=None, **kw):
+        latex, resources = super().from_notebook_node(nb, resources=resources, **kw)
+        # the tuple is unpacked/destructured for the purpose of clarity of return value
+        pdf, resources = self.from_latex(latex, resources)
+        return pdf, resources
