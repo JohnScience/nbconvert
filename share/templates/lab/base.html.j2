@@ -80,7 +80,11 @@
 {% endblock output_area_prompt %}
 
 {% block output %}
+{%- if output.output_type == 'execute_result' -%}
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+{%- else -%}
 <div class="jp-OutputArea-child">
+{%- endif -%}
 {% if resources.global_content_filter.include_output_prompt %}
     {{ self.output_area_prompt() }}
 {% endif %}
@@ -257,8 +261,8 @@ jp-needs-dark-background
  ###############################################################################
  #}
 
-{% set div_id = uuid4() %}
 {%- block data_javascript scoped %}
+{% set div_id = uuid4() %}
 <div id="{{ div_id }}" class="jp-RenderedJavaScript jp-OutputArea-output {{ extra_class }}" data-mime-type="application/javascript">
 <script type="text/javascript">
 var element = document.getElementById('{{ div_id }}');

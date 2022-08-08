@@ -23,12 +23,12 @@ dependencies = [
     "beautifulsoup4",
     "bleach",
     "defusedxml",
-    "entrypoints>=0.2.2",
+    "importlib_metadata>=3.6;python_version<\"3.10\"",
     "jinja2>=3.0",
     "jupyter_core>=4.7",
     "jupyterlab_pygments",
     "MarkupSafe>=2.0",
-    "mistune>=2.0.2",
+    "mistune>=2.0.3,<3",
     "nbclient>=0.5.0",
     "nbformat>=5.1",
     "packaging",
@@ -45,6 +45,8 @@ html = "nbconvert.exporters:HTMLExporter"
 slides = "nbconvert.exporters:SlidesExporter"
 latex = "nbconvert.exporters:LatexExporter"
 pdf = "nbconvert.exporters:PDFExporter"
+qtpdf = "nbconvert.exporters:QtPDFExporter"
+qtpng = "nbconvert.exporters:QtPNGExporter"
 webpdf = "nbconvert.exporters:WebPDFExporter"
 markdown = "nbconvert.exporters:MarkdownExporter"
 python = "nbconvert.exporters:PythonExporter"
@@ -64,9 +66,11 @@ test = [
     "pyppeteer>=1,<1.1",
 ]
 serve = ["tornado>=6.1"]
+qtpdf = ["pyqtwebengine>=5.15"]
+qtpng = ["pyqtwebengine>=5.15"]
 webpdf = ["pyppeteer>=1,<1.1"]
 docs = [
-    "sphinx>=1.5.1",
+    "sphinx==5.0.2",
     "sphinx_rtd_theme",
     "nbsphinx>=0.2.12",
     "ipython",
@@ -80,8 +84,9 @@ all = [
     "pytest",
     "pytest-cov",
     "pytest-dependency",
+    "pyqtwebengine>=5.15",
     "pyppeteer>=1,<1.1",
-    "sphinx>=1.5.1",
+    "sphinx==5.0.2",
     "sphinx_rtd_theme",
     "tornado>=6.1",
 ]
